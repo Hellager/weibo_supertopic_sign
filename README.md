@@ -1,0 +1,2 @@
+# weibo_supertopic_sign
+基于Python的微博超话签到脚本
