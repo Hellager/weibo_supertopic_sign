@@ -142,34 +142,27 @@ class SuperTopicHandler(object):
 
         base_url = 'https://api.weibo.cn'
 
+        sign_data = self.form_params()
+
         for value in enumerate(to_sign_list):
             page = value['page']
             since_id = value['since_id']
 
-            data = {
-                'aid': '01A-y_MsMUYarhUt6_xHUeAE3kC84H9oKkBMWh7Op-87-U6v4.',
-                'c': 'weicoabroad',
-                'containerid': '100803_-_followsuper',
-                'extparam': '',
-                'from': '1244193010',
-                'gsid': '_2A25MIpzfDeRxGeRI6lUS9ifOzz6IHXVteZcXrDV6PUJbkdCOLWXYkWpNUwauaVSGovz2eC14k8oWt5rLnz-QnC8h',
-                'i': '6050a0f',
-                'lang': 'zh_CN',
-                'page': '1',
-                's': '2625458f',
-                'ua': 'iPhone13,2_iOS14.7.1_Weibo_intl._4410_wifi',
-                'v_f': f'{page}',
-                'v_p': '59',
-                'since_id': f'{since_id}'
-            }
+            sign_data['v_f'] = f'{page}'
+            sign_data['since_id'] = f'{since_id}'
 
             time.sleep(random.randint(0, 5))
 
             if value['sign_status'] == '签到':
                 sign_url = base_url + value['sign_action']
-                response = requests.post(sign_url, headers=self.headers, data=data)
+                response = requests.post(sign_url, headers=self.headers, data=sign_data)
 
-                if response.get('msg') == '已签到':
-                    value['sign_status'] = '已签'
+                if response.json().get('errno') == -100:
+                    self.errmsg = '由于你近期修改过密码，或开启了登录保护，参数失效，请重新获取'
+                    log.error('由于你近期修改过密码，或开启了登录保护，参数失效，请重新获取')
+                    break
+                else:
+                    if response.json().get('msg') == '已签到':
+                        value['sign_status'] = '已签'
 
         self.notifier.do_notify(to_sign_list, self.errmsg)
