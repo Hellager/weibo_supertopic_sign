@@ -144,12 +144,9 @@ class SuperTopicHandler(object):
 
         sign_data = self.form_params()
 
-        for value in enumerate(to_sign_list):
-            page = value['page']
-            since_id = value['since_id']
-
-            sign_data['v_f'] = f'{page}'
-            sign_data['since_id'] = f'{since_id}'
+        for index, value in enumerate(to_sign_list):
+            sign_data['v_f'] = f'{value['page']}'
+            sign_data['since_id'] = f'{value['since_id']}'
 
             time.sleep(random.randint(0, 5))
 
