@@ -2,7 +2,7 @@
 name: Weibo Supertopic Sign
 on: 
   schedule:
-    - cron: 15 2 * * *
+    - cron: 20 2 * * *
     
   watch:
     types: [started]
