@@ -47,7 +47,7 @@ class SuperTopicHandler(object):
 
         row_text = self.config.ROW_URL[
                    self.config.ROW_URL.find('cardlist?') + len('cardlist?'):len(self.config.ROW_URL)]
-        for value in enumerate(row_text.split('&')):
+        for index, value in enumerate(row_text.split('&')):
             row_params[value[0: value.find('=')]] = value[value.find('=') + 1: len(value)]
 
         return row_params
