@@ -23,7 +23,7 @@ weibo_supertopic_sign/ <br>
 ## 参数说明
 |变量名称|变量含义  |
 |--|--|
-|ROW_URL(必需)| 抓包得到原始链接 需包含**aid**, **gsid**, **from**, **s** |
+|ROW_URL(必需)| 微博国际版手机端抓包得到的原始链接<br>需包含**aid**, **gsid**, **from**, **s** |
 |SIGN_TYPE(必需)| 签到方式选择 <br>DEFAULT -> 默认全部签到 <br>ONLY -> 仅签到在SIGN_LIST中的值 <br>EXCEPT -> 仅签到不在SIGN_LIST的值 |
 |SIGN_LIST(可选)| 签到列表设置，直接输入超话名称，以 ; 间隔 |
 |DING_SECRET(可选)| 钉钉机器人密钥 |
