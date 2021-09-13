@@ -49,11 +49,11 @@ weibo_supertopic_sign/ <br>
 
 3. Github Actions运行<br>
     * fork本仓库 在 **.github/workflows** 文件夹下找到 **dailysign.yml**
-    * 打开yml文件 修改第3~5行代码为如下即可每天定时九点运行
+    * 打开yml文件 修改第3~5行代码为如下即可每天定时北京时间 8:00am 运行 (start时间受全球该时段workflow数量影响 一般会晚半小时左右)
       ```Yml
       on: 
         schedule: 
-          - cron: '0 9 * * *'
+          - cron: '0 0 * * *'
       ```
      * 找到仓库 **Settings** -> **Secrets** -> **New repository secret** 根据参数说明**添加变量及变量值** 即完成设置
 
