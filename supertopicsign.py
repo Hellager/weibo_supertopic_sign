@@ -151,7 +151,7 @@ class SuperTopicHandler(object):
             sign_data['v_f'] = f'{page}'
             sign_data['since_id'] = f'{since_id}'
 
-            time.sleep(random.randint(0, 5))
+            time.sleep(random.randint(15, 30))
 
             if value['sign_status'] == '签到':
                 sign_url = base_url + value['sign_action']
