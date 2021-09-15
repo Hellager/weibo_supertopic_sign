@@ -87,7 +87,7 @@ class SuperTopicHandler(object):
             try:
                 page = str(json.loads(cardlistInfo["since_id"])["page"]);
             except Exception:
-                page = '8'
+                page = str(int(page) + 1)
 
             errcode = response.json().get('errno')
             if errcode:
