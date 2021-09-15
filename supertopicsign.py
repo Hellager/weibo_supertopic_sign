@@ -23,7 +23,7 @@ class SuperTopicHandler(object):
         self.notifier = notifier.Notifier()
 
     def form_params(self):
-        log.info('Starting forming requests params')
+        log.info('Start forming requests params')
 
         row_params = {
             'aid': '',
@@ -53,7 +53,7 @@ class SuperTopicHandler(object):
         return row_params
 
     def get_follow_list(self):
-        log.info('Starting getting super topic follow list')
+        log.info('Start getting super topic follow list')
 
         page = '1'
         since_id = ''
@@ -65,7 +65,7 @@ class SuperTopicHandler(object):
         url = 'https://api.weibo.cn/2/cardlist'
 
         while True:
-            time.sleep(random.randint(3, 5))
+            time.sleep(random.randint(5, 10))
             data['v_f'] = page
             data['since_id'] = since_id
 
@@ -83,17 +83,17 @@ class SuperTopicHandler(object):
             card_group = response.json().get('cards', [{}])[0].get('card_group', [])
             cardlistInfo = response.json().get('cardlistInfo', [{}])
 
-            since_id = str(cardlistInfo["since_id"]);
+            since_id = str(cardlistInfo["since_id"])
             try:
-                page = str(json.loads(cardlistInfo["since_id"])["page"]);
+                page = str(json.loads(cardlistInfo["since_id"])["page"])
             except Exception:
                 page = str(int(page) + 1)
 
             errcode = response.json().get('errno')
             if errcode:
-                log.info("page " + page + " get data failed")
+                log.info("page " + str(int(page)-1) + " get data failed")
             else:
-                log.info("page " + page + " get data success")
+                log.info("page " + str(int(page)-1) + " get data success")
 
             for value in card_group:
                 if value["card_type"] == "8":
@@ -111,12 +111,13 @@ class SuperTopicHandler(object):
                     })
 
             if since_id == '':
+                log.info("page " + page + " get data success")
                 break
 
         return follow_list
 
     def form_sign_list(self, row_list):
-        log.info('Starting forming super topic sign list')
+        log.info('Start forming super topic sign list')
 
         sign_list = []
         if self.config.IS_SORT == 'INCREASE':
@@ -138,11 +139,10 @@ class SuperTopicHandler(object):
         return sign_list
 
     def do_sign(self, to_sign_list):
-        log.info('Starting doing sign tasks')
-
         base_url = 'https://api.weibo.cn'
-
         sign_data = self.form_params()
+
+        log.info('Start doing sign tasks')
 
         for index, value in enumerate(to_sign_list):
             page = value['page']
@@ -157,6 +157,9 @@ class SuperTopicHandler(object):
                 sign_url = base_url + value['sign_action']
                 response = requests.post(sign_url, headers=self.headers, data=sign_data)
 
+                if response.json().get('msg') == '已签到':
+                    log.info('超话 ' + value["title_sub"] + ' 签到成功 ' + str(int(index) + 1) + '/' + str(len(to_sign_list)))
+
                 if response.json().get('errno') == -100:
                     self.errmsg = '由于你近期修改过密码，或开启了登录保护，参数失效，请重新获取'
                     log.error('由于你近期修改过密码，或开启了登录保护，参数失效，请重新获取')
@@ -164,5 +167,7 @@ class SuperTopicHandler(object):
                 else:
                     if response.json().get('msg') == '已签到':
                         value['sign_status'] = '已签'
+            elif value['sign_status'] == '已签':
+                log.info('超话 ' + value["title_sub"] + ' 已签到 ' + str(int(index) + 1) + '/' + str(len(to_sign_list)))
 
         self.notifier.do_notify(to_sign_list, self.errmsg)
