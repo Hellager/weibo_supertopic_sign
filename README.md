@@ -57,3 +57,14 @@ weibo_supertopic_sign/ <br>
       ```
      * 找到仓库 **Settings** -> **Secrets** -> **New repository secret** 根据参数说明**添加变量及变量值** 即完成设置
 
+## 注意事项
+为避免过快请求触发检测机制 程序中相关延时设置较为保守 若发现云端执行时程序无法签到所有超话 可尝试以下方法 <br>
+1. 修改代码段中延时时间
+```Python
+//supertopicsign.py 68行
+time.sleep(random.randint(5, 10))
+//supertopicsign.py 154行
+time.sleep(random.randint(15, 30))
+```
+2. 使用 SIGN_TYPE 和 SIGN_LIST 参数对超话进行分批次签到 <br>
+3. 使用 Github Actions 运行脚本 <br>
