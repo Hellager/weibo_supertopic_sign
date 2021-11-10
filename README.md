@@ -33,6 +33,12 @@ weibo_supertopic_sign/ <br>
 |IS_SORT(可选)| 结果是否根据等级排序<br>INCREASE -> 按等级升序 <br>DECREASE -> 按等级降序|
 |DISP_TYPE(必需)| 结果是否展示等级信息 <br>DEFAULT -> 默认成功简略显示 <br>DETAIL-> 成功签到显示等级 |
 
+## 抓包说明
+  * 打开 **微博国际版** -> **关注的超话** -> **超话社区**
+  * 开始抓包 -> 超话社区界面下拉刷新 -> 停止抓包
+  * 在 **会话记录** 中 搜索 **cardlist** 点进去即可得到 ROW_URL 参数
+[![IUVcLT.png](https://z3.ax1x.com/2021/11/10/IUVcLT.png)](https://imgtu.com/i/IUVcLT)
+
 ## 使用说明
 1. 本地使用 <br>
     下载代码至本地 要求环境 Python 3.6.8 及以上 <br>
@@ -68,3 +74,8 @@ time.sleep(random.randint(15, 30))
 ```
 2. 使用 SIGN_TYPE 和 SIGN_LIST 参数对超话进行分批次签到 <br>
 3. 使用 Github Actions 运行脚本 <br>
+
+## 注意事项2
+目前发现存在微博账号 其数据返回结构体与一般账号存在差异 会导致无法正确获取相关参数
+如果发现自己的账号存在这种情况且不知道怎么解决 请在ISSUE中提出并贴出数据的返回结构
+我会尽力解决并更新程序
