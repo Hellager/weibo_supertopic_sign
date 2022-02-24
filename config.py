@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+config.py
+从本地config.json中获取参数变量
+"""
 import json
 import os
 import sys

@@ -33,6 +33,11 @@ weibo_supertopic_sign/ <br>
 |IS_SORT(可选)| 结果是否根据等级排序<br>INCREASE -> 按等级升序 <br>DECREASE -> 按等级降序|
 |DISP_TYPE(必需)| 结果是否展示等级信息 <br>DEFAULT -> 默认成功简略显示 <br>DETAIL-> 成功签到显示等级 |
 
+## 更新说明
+2022-2-24 添加测试程序 方便调试纠错 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; 测试前填写好 test/config.json 中参数 直接运行test/test_index.py 即可
+&nbsp;&nbsp;&nbsp;&nbsp; 结果可在 test/data 文件夹中查看 均以 json 文件形式保存
+
 ## 使用说明
 1. 本地使用 <br>
     下载代码至本地 要求环境 Python 3.6.8 及以上 <br>
