@@ -2,7 +2,7 @@
 ## 项目简介
 1. 基于Python实现微博超话关注列表的获取及签到
 2. 根据签到结果选择不同渠道进行通知(钉钉, 微信, QQ)
-3. 可通过Github Actions 实现云端定期执行
+3. 可通过腾讯云或阿里云实现每日定期签到
 
 ## 文件结构
 weibo_supertopic_sign/ <br>
@@ -52,15 +52,6 @@ weibo_supertopic_sign/ <br>
     * 进入 **函数管理** -> **函数配置** -> 设置**执行超时时间** -> 设置**环境变量** <br>
     * 进入 **触发管理** -> **创建触发器** -> 选择 **自定义触发周期** -> 设置**corn表达式** -> **提交** 即完成设置
 
-3. Github Actions运行<br>
-    * fork本仓库 在 **.github/workflows** 文件夹下找到 **dailysign.yml**
-    * 打开yml文件 修改第3~5行代码为如下即可每天定时北京时间 8:00am 运行 (start时间受全球该时段workflow数量影响 一般会晚半小时左右)
-      ```Yml
-      on: 
-        schedule: 
-          - cron: '0 0 * * *'
-      ```
-     * 找到仓库 **Settings** -> **Secrets** -> **New repository secret** 根据参数说明**添加变量及变量值** 即完成设置
 
 ## 注意事项
 为避免过快请求触发检测机制 程序中相关延时设置较为保守 若发现云端执行时程序无法签到所有超话 可尝试以下方法 <br>
@@ -72,7 +63,6 @@ time.sleep(random.randint(5, 10))
 time.sleep(random.randint(15, 30))
 ```
 2. 使用 SIGN_TYPE 和 SIGN_LIST 参数对超话进行分批次签到 <br>
-3. 使用 Github Actions 运行脚本 <br>
 
 ## 注意事项2
 目前发现存在微博账号 其数据返回结构体与一般账号存在差异 会导致无法正确获取相关参数<br>
