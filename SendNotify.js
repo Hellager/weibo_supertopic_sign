@@ -1,10 +1,11 @@
 /*
  * @Author: Hellager
  * @Date: 2022-06-20 15:21:22
- * @LastEditTime: 2022-06-23 14:00:47
+ * @LastEditTime: 2022-06-23 15:11:59
  * @LastEditors: Hellager
  */
 const querystring = require('querystring');
+const $ = new Env();
 const dotenv = require("dotenv")
 dotenv.config();
 const timeout = 15000; //超时时间(单位毫秒)
