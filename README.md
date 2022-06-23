@@ -1,4 +1,7 @@
 # 基于Python的微博超话签到脚本
+
+> 更新：支持青龙面板，前往[nodejs分支](https://github.com/Hellager/weibo_supertopic_sign/tree/nodejs)查看教程 
+
 ## 项目简介
 1. 基于Python实现微博超话关注列表的获取及签到
 2. 根据签到结果选择不同渠道进行通知(钉钉, 微信, QQ)
