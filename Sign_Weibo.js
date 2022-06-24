@@ -254,7 +254,7 @@ async function get_follow_list(cookie) {
             error_msg_list.push(`获取超话列表第 ${page} 页数据失败, 错误提示：${err}`);
         })
 
-        if (since_id === '' || isSuccess === false) {
+        if (since_id === '' || isSuccess === false || since_id === '0') {
             break;
         }
     }
