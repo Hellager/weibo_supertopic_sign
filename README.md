@@ -23,6 +23,12 @@ weibo_supertopic_sign/ <br>
 | -- supertopicsign.py -> 微博超话关注列表的获取及签到<br>
 | -- utils.py -> 系统打印设置<br>
 
+## 抓包说明
+  * 打开 **微博国际版** -> **关注的超话** -> **超话社区**
+  * 开始抓包 -> 超话社区界面下拉刷新 -> 停止抓包
+  * 在 **会话记录** 中 搜索 **cardlist** 点进去即可得到 ROW_URL 参数
+[![IUVcLT.png](https://z3.ax1x.com/2021/11/10/IUVcLT.png)](https://imgtu.com/i/IUVcLT)
+
 ## 参数说明
 |变量名称|变量含义  |
 |--|--|
