@@ -1,9 +1,10 @@
 # 基于Python的微博超话签到脚本
 
-> 更新：支持青龙面板，前往[nodejs分支](https://github.com/Hellager/weibo_supertopic_sign/tree/nodejs)查看教程 
+> 更新：支持青龙面板，前往[nodejs分支](https://github.com/Hellager/weibo_supertopic_sign/tree/nodejs)查看教程
+> 
+> 再次更新： Python 版本现支持全部签到及多用户签到，请根据需要自定设置
 
-> 重要！：微博国际版升级为轻享版后无法抓包获取相关请求，请使用低版本进行抓包
-
+> 更正！：微博国际版升级为轻享版后仍可抓包，如是 ios 请使用 Stream， Thor 已废
 ## 项目简介
 1. 基于Python实现微博超话关注列表的获取及签到
 2. 根据签到结果选择不同渠道进行通知(钉钉, 微信, QQ)
@@ -34,9 +35,8 @@ weibo_supertopic_sign/ <br>
 ## 参数说明
 |变量名称|变量含义  |
 |--|--|
-|ROW_URL(必需)| 微博国际版手机端抓包得到的原始链接<br>需包含**aid**, **gsid**, **from**, **s** |
-|SIGN_TYPE(必需)| 签到方式选择 <br>DEFAULT -> 默认全部签到 <br>ONLY -> 仅签到在SIGN_LIST中的值 <br>EXCEPT -> 仅签到不在SIGN_LIST的值 |
-|SIGN_LIST(可选)| 签到列表设置，直接输入超话名称，以 ; 间隔 |
+|ROW_URL(必需)| 微博国际版手机端抓包得到的原始链接<br>需包含**aid**, **gsid**, **from**, **s**，通过 ';' 分隔多用户参数 |
+|SIGN_ONCE_COUNT(必需)| 一次运行时签到的超话数 |
 |DING_SECRET(可选)| 钉钉机器人密钥 |
 |DING_WEBHOOK(可选)| 钉钉机器人webhook |
 |SERVER_KEY(可选)| Server酱 Key |
@@ -45,7 +45,15 @@ weibo_supertopic_sign/ <br>
 |DISP_TYPE(必需)| 结果是否展示等级信息 <br>DEFAULT -> 默认成功简略显示 <br>DETAIL-> 成功签到显示等级 |
 
 ## 更新说明
-2022-2-24 添加测试程序 方便调试纠错 <br>
+2022-9-17
+
+python 云函数分支 更新签到参数，支持多用户签到，全超话签到
+
+通过单次执行数量限制避免云函数超时，通过多次触发 cron 签到全部超话
+
+2022-2-24 
+
+添加测试程序 方便调试纠错 <br>
 &nbsp;&nbsp;&nbsp;&nbsp; 测试前填写好 test/config.json 中参数 直接运行test/test_index.py 即可
 &nbsp;&nbsp;&nbsp;&nbsp; 结果可在 test/data 文件夹中查看 均以 json 文件形式保存
 

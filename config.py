@@ -10,17 +10,14 @@ import os
 import sys
 from utils import log
 
+
 class Config(object):
     """
     Get configuration from the config.json file or from the environment.
     Note:
           ROW_URL: This is the row url from the network package,
                     which should include field gsid, aid, from, s
-          SIGN_TYPE: This is the variable to choose the sign method(DEFAULT, ONLY, EXCEPT)
-                      DEFAULT -> This will sign all your superindex
-                      ONLY -> This will sign the superindex only in your SIGN_LIST
-                      EXCEPT -> This will sign the superindex only not in your SIGN_LIST
-          SIGN_LIST: This is the sign list
+          SIGN_ONCE_COUNT: This determine the sign topic count in one runtime, repeat to sign all topics
           Ding_SECRET: This is the secret key of your ding ding bot
           Ding_WEBHOOK: This is the webhook of your ding ding bot
           Server_KEY: This is the key of your server chan
@@ -45,8 +42,7 @@ class Config(object):
             self.config_json = json.load(fl_obj)
 
         self.ROW_URL = self.get_config('ROW_URL')
-        self.SIGN_TYPE = self.get_config('SIGN_TYPE')
-        self.SIGN_LIST = self.get_config('SIGN_LIST')
+        self.SIGN_ONCE_COUNT = int(self.get_config('SIGN_ONCE_COUNT'))
         self.Ding_SECRET = self.get_config('DING_SECRET')
         self.Ding_WEBHOOK = self.get_config('DING_WEBHOOK')
         self.Server_KEY = self.get_config('SERVER_KEY')

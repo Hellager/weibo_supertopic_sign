@@ -14,13 +14,13 @@ class Notifier(object):
         self.server_chan = serverchan.ServerChan()
         self.qmesg_chan = qmsgchan.QmsgChan()
 
-    def do_notify(self, sign_list, errmsg):
+    def do_notify(self, user_signed_list, errmsg):
         log.info('Starting notifying')
         if self.config.Ding_SECRET != '' and self.config.Ding_WEBHOOK != '':
-            self.ding_bot.send(self.ding_bot.form_content(sign_list, self.config.DISP_TYPE), errmsg)
+            self.ding_bot.send(self.ding_bot.form_content(user_signed_list, self.config.DISP_TYPE), errmsg)
 
         if self.config.Server_KEY != '':
-            self.server_chan.send(self.server_chan.form_content(sign_list, self.config.DISP_TYPE), errmsg)
+            self.server_chan.send(self.server_chan.form_content(user_signed_list, self.config.DISP_TYPE), errmsg)
 
         if self.config.QMsg_KEY != '':
-            self.qmesg_chan.send(self.qmesg_chan.form_content(sign_list, self.config.DISP_TYPE), errmsg)
+            self.qmesg_chan.send(self.qmesg_chan.form_content(user_signed_list, self.config.DISP_TYPE), errmsg)
