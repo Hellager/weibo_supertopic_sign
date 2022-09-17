@@ -10,8 +10,7 @@ import requests
 import config
 
 
-def test_get_follow_list():
-    configuration = config.Config()
+def test_get_follow_list(cookie):
     headers = {
         'Accept': '*/*',
         'Host': 'api.weibo.cn',
@@ -43,12 +42,12 @@ def test_get_follow_list():
         'v_p': '',
         'since_id': ''
     }
-    if configuration.ROW_URL == '':
-        return row_params
 
-    row_text = configuration.ROW_URL[
-               configuration.ROW_URL.find('cardlist?') + len('cardlist?'):len(configuration.ROW_URL)]
-    for index, value in enumerate(row_text.split('&')):
+    if cookie == '':
+        print('Error: Cookie invalid')
+        return follow_list
+
+    for index, value in enumerate(cookie.split('&')):
         row_params[value[0: value.find('=')]] = value[value.find('=') + 1: len(value)]
 
     print('已生成网络请求参数')
