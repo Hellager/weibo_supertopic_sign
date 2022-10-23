@@ -1,10 +1,10 @@
 {
   "ROW_URL": "",
-  "SIGN_ONCE_COUNT": "",
+  "SIGN_ONCE_COUNT": "20",
   "DING_SECRET": "",
   "DING_WEBHOOK": "",
   "SERVER_KEY": "",
   "QMSG_KEY": "",
-  "IS_SORT": "",
-  "DISP_TYPE": ""
+  "IS_SORT": "FALSE",
+  "DISP_TYPE": "DEFAULT"
 }

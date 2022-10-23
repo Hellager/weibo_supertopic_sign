@@ -27,10 +27,14 @@ class ServerChan(object):
             success_count = 0
             fail_list = []
             for value in signed_list:
-                if value["sign_status"] == "已签":
-                    success_count = success_count + 1
-                elif value["sign_status"] == "签到":
-                    fail_list.append(value["title_sub"])
+                try:
+                    if value["sign_status"] == "已签":
+                        success_count = success_count + 1
+                    elif value["sign_status"] == "签到":
+                        fail_list.append(value["title_sub"])
+                except TypeError:
+                    log.error("Type error occurs, current value" + value["sign_status"])
+
 
             if style == 'DEFAULT':
                 user_content = '用户 ' + username + '\n\n - 成功签到 ' + str(
