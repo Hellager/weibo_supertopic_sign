@@ -220,34 +220,38 @@ async function get_follow_list(cookie) {
                 error_msg_list.push(`获取超话列表第 ${page} 页数据失败, 错误提示：${res_obj.errmsg}`);
                 return;
             }
-    
-            let card_group = res_obj.cards[0].card_group;
-            let card_list_info = res_obj.cardlistInfo;
-    
-            since_id = card_list_info.since_id;
-            try {
-                page = JSON.parse(since_id).page.toString();
-            } catch {
-                page = (parseInt(page) + 1).toString(); 
-            }
+            
+            if (res_obj.cards.length > 0) {
+                let card_group = res_obj.cards[0].card_group;
+                let card_list_info = res_obj.cardlistInfo;
 
-            for (const item of card_group) {
-                if (item.card_type === '8') {
-                    const page_index = item.itemid.slice(item.itemid.indexOf('follow_super_follow_') + 'follow_super_follow_'.length, item.itemid.length);
-                    const topic = {
-                        title: item.title_sub,
-                        level: item.desc1.slice(item.desc1.indexOf('.') + 1, item.desc1.length),
-                        sign_status: item.buttons[0].name,
-                        sign_action: item.buttons[0].name === '已签' ? '' : item.buttons[0].params.action,
-                        since_id: since_id,
-                        page: page_index.split('_')[0],
-                    }
+                since_id = card_list_info.since_id;
+                try {
+                    page = JSON.parse(since_id).page.toString();
+                } catch {
+                    page = (parseInt(page) + 1).toString(); 
+                }
 
-                    follow_list.push(topic);
-                }                
-            }
+                for (const item of card_group) {
+                    if (item.card_type === '8') {
+                        const page_index = item.itemid.slice(item.itemid.indexOf('follow_super_follow_') + 'follow_super_follow_'.length, item.itemid.length);
+                        const topic = {
+                            title: item.title_sub,
+                            level: item.desc1.slice(item.desc1.indexOf('.') + 1, item.desc1.length),
+                            sign_status: item.buttons[0].name,
+                            sign_action: item.buttons[0].name === '已签' ? '' : item.buttons[0].params.action,
+                            since_id: since_id,
+                            page: page_index.split('_')[0],
+                        }
 
-            log.info(`获取超话列表第 ${page-1} 页数据成功`);            
+                        follow_list.push(topic);
+                    }                
+                }
+
+                log.info(`获取超话列表第 ${page-1} 页数据成功`);              
+            } else {
+                since_id === '0'
+            }       
         })
         .catch(err => {
             log.error(`获取超话列表第 ${page} 页数据失败. 错误提示：${err}`)
