@@ -18,7 +18,6 @@ class SuperTopicHandler(object):
         self.request_headers = {
             'Accept': '*/*',
             'Host': 'api.weibo.cn',
-            'Accept-Encoding': 'gzip, deflate, br',
             'User-Agent': 'WeiboOverseas/4.4.1 (iPhone; iOS 14.7.1; Scale/3.00)',
             'Accept-Language': 'zh-Hans-CN;q=1, en-CN;q=0.9',
         }
@@ -31,7 +30,6 @@ class SuperTopicHandler(object):
         request_username_headers = {
             'Accept': '*/*',
             'Host': 'api.weibo.cn',
-            'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'zh-Hans-CN;q=1, en-CN;q=0.9',
             'User-Agent': 'WeiboOverseas/4.7.8 (iPhone; iOS 15.5; Scale/3.00)',
             'Content-type': 'application/x-www-form-urlencoded',
