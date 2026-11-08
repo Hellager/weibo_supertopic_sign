@@ -37,7 +37,7 @@ class SuperTopicHandler(object):
 
         request_username_url = 'https://api.weibo.cn/2/users/update'
 
-        response = requests.post(request_username_url, params=cookie, headers=request_username_headers)
+        response = requests.post(request_username_url, params=cookie, headers=request_username_headers, timeout=30)
 
         try:
             username = response.json().get('name')
@@ -135,7 +135,7 @@ class SuperTopicHandler(object):
             data['v_f'] = page
             data['since_id'] = since_id
 
-            response = requests.get(url, params=data, headers=self.request_headers)
+            response = requests.get(url, params=data, headers=self.request_headers, timeout=30)
 
             try:
                 if response.json().get('errno') == -100:
@@ -214,7 +214,7 @@ class SuperTopicHandler(object):
             if value['sign_status'] == '签到':
                 time.sleep(random.randint(15, 30))
                 sign_url = base_url + value['sign_action']
-                response = requests.post(sign_url, headers=self.request_headers, data=sign_data)
+                response = requests.post(sign_url, headers=self.request_headers, data=sign_data, timeout=30)
 
                 self.current_signed_count += 1
 
